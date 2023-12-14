@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class ProductCard extends StatelessWidget {
   final String title;
@@ -17,7 +16,6 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print(Provider.of<String>(context));
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.all(16.0),

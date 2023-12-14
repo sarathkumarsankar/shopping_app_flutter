@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:shopping_app/cart_provider.dart';
 
 class ProductDetailPage extends StatefulWidget {
   final Map<String, Object> product;
@@ -16,7 +18,26 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   void initState() {
     super.initState();
     sizes = widget.product['sizes'] as List<int>;
-    print(sizes);
+  }
+
+  void onTap() {
+    if (selectedSize != 0) {
+      Provider.of<CartProvider>(context, listen: false).addToCart(
+        {
+          'id': widget.product['id'],
+          'title': widget.product['title'],
+          'price': widget.product['price'],
+          'imageUrl': widget.product['imageUrl'],
+          'company': widget.product['company'],
+          'size': selectedSize,
+        },
+      );
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Added to cart successfully')));
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Please select size')));
+    }
   }
 
   @override
@@ -31,8 +52,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       )),
       body: Column(children: [
         Center(
-            child: Text(widget.product['title'].toString(),
-                style: Theme.of(context).textTheme.titleLarge)),
+          child: Text(widget.product['title'].toString(),
+              style: Theme.of(context).textTheme.titleLarge),
+        ),
         const Spacer(),
         Image.asset(widget.product['imageUrl'].toString()),
         const Spacer(
@@ -79,7 +101,9 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Theme.of(context).primaryColor,
                       minimumSize: const Size(280, 40)),
-                  onPressed: () {},
+                  onPressed: () {
+                    onTap();
+                  },
                   child: const Text(
                     'Add To Cart',
                     style: TextStyle(

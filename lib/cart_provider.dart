@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 
 class CartProvider extends ChangeNotifier {
   final List<Map<String, dynamic>> cart = [];
-  
-  void addToCart(params) {
-    cart.add(params);
+
+  void addToCart(Map<String, dynamic> product) {
+    cart.add(product);
+    notifyListeners();
   }
 
-    void removeFromCart(params) {
-    cart.removeAt(0);
+  void removeFromCart(Map<String, dynamic> product) {
+    cart.remove(product);
+    notifyListeners();
   }
 }
