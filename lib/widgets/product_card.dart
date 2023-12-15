@@ -32,7 +32,7 @@ class ProductCard extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium,
           ),
           Text(
-            "\$$price",
+            "£$price",
             style: Theme.of(context).textTheme.bodySmall,
           ),
           Center(

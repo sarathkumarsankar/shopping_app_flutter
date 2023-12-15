@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shopping_app/model/products.dart';
 import 'package:shopping_app/providers/cart_provider.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  final Map<String, Object> product;
+  final Product product;
   const ProductDetailPage({super.key, required this.product});
 
   @override
@@ -17,21 +18,20 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
   @override
   void initState() {
     super.initState();
-    sizes = widget.product['sizes'] as List<int>;
+    sizes = widget.product.sizes;
   }
 
   void onTap() {
     if (selectedSize != 0) {
-      Provider.of<CartProvider>(context, listen: false).addToCart(
-        {
-          'id': widget.product['id'],
-          'title': widget.product['title'],
-          'price': widget.product['price'],
-          'imageUrl': widget.product['imageUrl'],
-          'company': widget.product['company'],
-          'size': selectedSize,
-        },
-      );
+      Provider.of<CartProvider>(context, listen: false).addToCart(CartItem(
+          id: widget.product.id,
+          title: widget.product.title,
+          price: widget.product.price,
+          imageUrl: widget.product.imageUrl,
+          company: widget.product.company,
+          size: selectedSize,
+          category: widget.product.category));
+        
       ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Added to cart successfully')));
     } else {
@@ -42,7 +42,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final price = widget.product['price'].toString();
+    final price = widget.product.price.toString();
 
     return Scaffold(
       appBar: AppBar(
@@ -52,11 +52,14 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
       )),
       body: Column(children: [
         Center(
-          child: Text(widget.product['title'].toString(),
+          child: Text(widget.product.title.toString(),
               style: Theme.of(context).textTheme.titleLarge),
         ),
         const Spacer(),
-        Image.asset(widget.product['imageUrl'].toString(), height: 250,),
+        Image.asset(
+          widget.product.imageUrl.toString(),
+          height: 250,
+        ),
         const Spacer(
           flex: 2,
         ),
@@ -68,7 +71,7 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
               const SizedBox(
                 height: 25,
               ),
-              Text("\$$price", style: Theme.of(context).textTheme.titleLarge),
+              Text("£$price", style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 10),
               SizedBox(
                 height: 50,

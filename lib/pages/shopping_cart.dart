@@ -22,18 +22,17 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
           style: TextStyle(fontSize: 18),
         ),
       ),
-      body: ListView.builder(
+      body: cart.isEmpty ? const Center(child: Text("Your cart is empty:)", style: TextStyle(fontSize: 16 ),)) : ListView.builder(
           itemCount: cart.length,
           itemBuilder: ((context, index) {
             final cartItem = cart[index];
             return ListTile(
               leading: CircleAvatar(
                 radius: 30,
-                child: Image.asset(cartItem['imageUrl'] as String),
+                child: Image.asset(cartItem.imageUrl),
               ),
               trailing: IconButton(
                 onPressed: () {
-                  print('object');
                   showDialog(
                       context: context,
                       builder: (BuildContext content) {
@@ -78,12 +77,14 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
                 color: Colors.red,
               ),
               title: Text(
-                cartItem['title'].toString(),
+                cartItem.title,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              subtitle: Text('Size: ${cartItem["size"]}'),
+              subtitle: Text('Size: ${cartItem.size},    Price: £${cartItem.price}'),
             );
-          })),
+          }
+          )
+          ) 
     );
   }
 }

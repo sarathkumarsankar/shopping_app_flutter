@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:shopping_app/global_variables.dart';
+import 'package:shopping_app/model/products.dart';
 import 'package:shopping_app/widgets/product_card.dart';
 import 'package:shopping_app/pages/product_detail.dart';
 
@@ -13,19 +13,16 @@ class ShoppingListPage extends StatefulWidget {
 
 class _MyWidgetState extends State<ShoppingListPage> {
   final TextEditingController controller = TextEditingController();
-  final List<String> filters = [
-    "All",
-    "Adidas",
-    "Nike",
-    "Bata",
-    "Reebok",
-    "JD"
-  ];
+  final List<ProductCategory> filterCategory = ProductCategory.values;
+
+
   late String selectedFilter;
+  late ProductCategory selectedCategory;
+
   @override
   void initState() {
     super.initState();
-    selectedFilter = filters[0];
+    selectedCategory = filterCategory[0];
   }
 
   @override
@@ -38,8 +35,8 @@ class _MyWidgetState extends State<ShoppingListPage> {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40.0),
               bottomLeft: Radius.circular(40.0)),
-        ));
-    final size = MediaQuery.sizeOf(context);
+        )
+        );
 
     return Scaffold(
       body: SafeArea(
@@ -71,13 +68,13 @@ class _MyWidgetState extends State<ShoppingListPage> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    for (int i = 0; i < filters.length; i++)
+                    for (int i = 0; i < filterCategory.length; i++)
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: FilterChip(
                           padding: const EdgeInsets.all(14),
-                          label: Text(filters[i]),
-                          backgroundColor: filters[i] == selectedFilter
+                          label: Text(filterCategory[i].name.toUpperCase()),
+                          backgroundColor: filterCategory[i] == selectedCategory
                               ? Theme.of(context).primaryColor
                               : const Color.fromRGBO(243, 245, 248, 1),
                           shape: const StadiumBorder(
@@ -85,7 +82,7 @@ class _MyWidgetState extends State<ShoppingListPage> {
                           ),
                           onSelected: (value) {
                             setState(() {
-                              selectedFilter = filters[i];
+                              selectedCategory = filterCategory[i];
                             });
                           },
                         ),
@@ -116,9 +113,9 @@ class _MyWidgetState extends State<ShoppingListPage> {
                           );
                         },
                         child: ProductCard(
-                          title: products[index]["title"] as String,
-                          price: products[index]["price"].toString(),
-                          imageUrl: products[index]["imageUrl"] as String,
+                          title: products[index].title,
+                          price: products[index].price.toString(),
+                          imageUrl: products[index].imageUrl,
                           backGroundcolor: index.isEven
                               ? const Color.fromRGBO(216, 240, 253, 1)
                               : const Color.fromRGBO(245, 247, 249, 1),
@@ -142,9 +139,9 @@ class _MyWidgetState extends State<ShoppingListPage> {
                           );
                         },
                         child: ProductCard(
-                          title: products[index]["title"] as String,
-                          price: products[index]["price"].toString(),
-                          imageUrl: products[index]["imageUrl"] as String,
+                          title: products[index].title,
+                          price: products[index].price.toString(),
+                          imageUrl: products[index].imageUrl,
                           backGroundcolor: index.isEven
                               ? const Color.fromRGBO(216, 240, 253, 1)
                               : const Color.fromRGBO(245, 247, 249, 1),

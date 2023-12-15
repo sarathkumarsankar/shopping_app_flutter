@@ -1,37 +1,4 @@
-final products = [
-  {
-    'id': '0',
-    'title': 'Men\'s Nike Shoes',
-    'price': 44.52,
-    'imageUrl': 'assets/images/shoes_1.png',
-    'company': 'Nike',
-    'sizes': [9, 10, 11, 12],
-  },
-  {
-    'id': '1',
-    'title': 'Addidas Shoes',
-    'price': 20.12,
-    'imageUrl': 'assets/images/shoes_2.png',
-    'company': 'Addidas',
-    'sizes': [9, 10, 12],
-  },
-  {
-    'id': '2',
-    'title': 'Bata Women\'s Shoes',
-    'price': 28.95,
-    'imageUrl': 'assets/images/shoes_3.png',
-    'company': 'Bata',
-    'sizes': [8, 9, 10],
-  },
-  {
-    'id': '3',
-    'title': 'Jordan Shoes',
-    'price': 420.69,
-    'imageUrl': 'assets/images/shoes_4.png',
-    'company': 'Nike',
-    'sizes': [8, 9, 10],
-  },
-];
+import 'package:shopping_app/model/products.dart';
 
 final cart = [
   {
@@ -42,4 +9,109 @@ final cart = [
     'company': 'Nike',
     'size': 8,
   },
+];
+
+
+final List<Product> products = [
+  Product(
+    id: '0',
+    title: 'Men\'s Nike Shoes',
+    price: 44.52,
+    imageUrl: 'assets/images/shoes_1.png',
+    company: 'Nike',
+    sizes: [9, 10, 11, 12],
+    category: ProductCategory.nike,
+  ),
+  Product(
+    id: '1',
+    title: 'Addidas Shoes',
+    price: 20.12,
+    imageUrl: 'assets/images/shoes_2.png',
+    company: 'Addidas',
+    sizes: [9, 10, 12],
+    category: ProductCategory.adidas,
+  ),
+  Product(
+    id: '2',
+    title: 'Bata Women\'s Shoes',
+    price: 28.95,
+    imageUrl: 'assets/images/shoes_3.png',
+    company: 'Bata',
+    sizes: [8, 9, 10],
+    category: ProductCategory.bata,
+  ),
+  Product(
+    id: '3',
+    title: 'Jordan Shoes',
+    price: 420.69,
+    imageUrl: 'assets/images/shoes_4.png',
+    company: 'Nike',
+    sizes: [8, 9, 10],
+    category: ProductCategory.nike,
+  ),
+  Product(
+    id: '4',
+    title: 'Puma Running Shoes',
+    price: 35.99,
+    imageUrl: 'assets/images/shoes_1.png',
+    company: 'Puma',
+    sizes: [7, 8, 9],
+    category: ProductCategory.puma,
+  ),
+  Product(
+    id: '5',
+    title: 'Reebok Crossfit Shoes',
+    price: 55.75,
+    imageUrl: 'assets/images/shoes_2.png',
+    company: 'Reebok',
+    sizes: [10, 11, 12],
+    category: ProductCategory.reebok,
+  ),
+  // Additional Dummy Data
+  Product(
+    id: '6',
+    title: 'Vans Skate Shoes',
+    price: 38.25,
+    imageUrl: 'assets/images/shoes_3.png',
+    company: 'Vans',
+    sizes: [8, 9, 10],
+    category: ProductCategory.vans,
+  ),
+  Product(
+    id: '7',
+    title: 'Converse Chuck Taylor',
+    price: 29.99,
+    imageUrl: 'assets/images/shoes_4.png',
+    company: 'Converse',
+    sizes: [7, 8, 9],
+    category: ProductCategory.converse,
+  ),
+  Product(
+    id: '8',
+    title: 'New Balance Running Shoes',
+    price: 48.50,
+    imageUrl: 'assets/images/shoes_1.png',
+    company: 'New Balance',
+    sizes: [8, 9, 10],
+    category: ProductCategory.newBalance,
+  ),
+  Product(
+    id: '9',
+    title: 'Under Armour Basketball Shoes',
+    price: 62.99,
+    imageUrl: 'assets/images/shoes_2.png',
+    company: 'Under Armour',
+    sizes: [10, 11, 12],
+    category: ProductCategory.underArmour,
+  ),
+  Product(
+    id: '10',
+    title: 'Skechers Sneakers',
+    price: 40.75,
+    imageUrl: 'assets/images/shoes_3.png',
+    company: 'Skechers',
+    sizes: [7, 8, 9],
+    category: ProductCategory.underArmour,
+  ),
+  // Add more products as needed
 ];
