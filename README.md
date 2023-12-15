@@ -2,7 +2,11 @@
 
 A new Flutter project.
 
+![ezgif com-video-to-gif-converted (3)](https://github.com/sarathkumarsankar/shopping_app_flutter/assets/12977299/22e9ca2f-6328-4773-a9b1-3f932d706088)
+
+
 ## Getting Started
+
 
 This project is a starting point for a Flutter application.
 
