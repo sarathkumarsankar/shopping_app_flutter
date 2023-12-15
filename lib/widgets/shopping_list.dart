@@ -14,9 +14,7 @@ class ShoppingListPage extends StatefulWidget {
 class _MyWidgetState extends State<ShoppingListPage> {
   final TextEditingController controller = TextEditingController();
   final List<ProductCategory> filterCategory = ProductCategory.values;
-
-
-  late String selectedFilter;
+  var filterdPorducts = products;
   late ProductCategory selectedCategory;
 
   @override
@@ -35,16 +33,15 @@ class _MyWidgetState extends State<ShoppingListPage> {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(40.0),
               bottomLeft: Radius.circular(40.0)),
-        )
-        );
+        ));
 
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
-            const Row(
+            Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 200,
                   child: Padding(
                     padding: EdgeInsets.all(16.0),
@@ -57,6 +54,7 @@ class _MyWidgetState extends State<ShoppingListPage> {
                 ),
                 Expanded(
                     child: TextField(
+                  controller: controller,
                   decoration: inputDecoration,
                 ))
               ],
@@ -83,6 +81,13 @@ class _MyWidgetState extends State<ShoppingListPage> {
                           onSelected: (value) {
                             setState(() {
                               selectedCategory = filterCategory[i];
+                              filterdPorducts = products.where((element) {
+                                if (selectedCategory == ProductCategory.all) {
+                                  return true;
+                                } else {
+                                  return element.category == selectedCategory;
+                                }
+                              }).toList();
                             });
                           },
                         ),
@@ -96,9 +101,8 @@ class _MyWidgetState extends State<ShoppingListPage> {
                 return GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 1.75),
-                    itemCount: products.length,
+                            crossAxisCount: 2, childAspectRatio: 1.75),
+                    itemCount: filterdPorducts.length,
                     itemBuilder: ((context, index) {
                       // return ProductCard();
                       return GestureDetector(
@@ -107,15 +111,15 @@ class _MyWidgetState extends State<ShoppingListPage> {
                             MaterialPageRoute(
                               builder: (context) {
                                 return ProductDetailPage(
-                                    product: products[index]);
+                                    product: filterdPorducts[index]);
                               },
                             ),
                           );
                         },
                         child: ProductCard(
-                          title: products[index].title,
-                          price: products[index].price.toString(),
-                          imageUrl: products[index].imageUrl,
+                          title: filterdPorducts[index].title,
+                          price: filterdPorducts[index].price.toString(),
+                          imageUrl: filterdPorducts[index].imageUrl,
                           backGroundcolor: index.isEven
                               ? const Color.fromRGBO(216, 240, 253, 1)
                               : const Color.fromRGBO(245, 247, 249, 1),
@@ -124,7 +128,7 @@ class _MyWidgetState extends State<ShoppingListPage> {
                     }));
               } else {
                 return ListView.builder(
-                    itemCount: products.length,
+                    itemCount: filterdPorducts.length,
                     itemBuilder: ((context, index) {
                       // return ProductCard();
                       return GestureDetector(
@@ -133,15 +137,15 @@ class _MyWidgetState extends State<ShoppingListPage> {
                             MaterialPageRoute(
                               builder: (context) {
                                 return ProductDetailPage(
-                                    product: products[index]);
+                                    product: filterdPorducts[index]);
                               },
                             ),
                           );
                         },
                         child: ProductCard(
-                          title: products[index].title,
-                          price: products[index].price.toString(),
-                          imageUrl: products[index].imageUrl,
+                          title: filterdPorducts[index].title,
+                          price: filterdPorducts[index].price.toString(),
+                          imageUrl: filterdPorducts[index].imageUrl,
                           backGroundcolor: index.isEven
                               ? const Color.fromRGBO(216, 240, 253, 1)
                               : const Color.fromRGBO(245, 247, 249, 1),

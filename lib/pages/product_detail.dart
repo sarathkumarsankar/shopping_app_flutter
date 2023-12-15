@@ -100,20 +100,19 @@ class _ProductDetailPageState extends State<ProductDetailPage> {
                     })),
               ),
               const SizedBox(height: 10),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Theme.of(context).primaryColor,
-                      fixedSize: const Size(300, 40)),
-                  onPressed: () {
-                    onTap();
-                  },
-                  child: const Text(
+
+              ElevatedButton.icon(icon: const Icon(Icons.shopping_cart_checkout_outlined,), label: const Text(
                     'Add To Cart',
                     style: TextStyle(
                         fontWeight: FontWeight.normal,
                         fontSize: 16,
                         color: Colors.black),
-                  ))
+                  ), onPressed: () {
+                      onTap();
+                  }, style: ElevatedButton.styleFrom(
+                      backgroundColor: Theme.of(context).primaryColor,
+                      fixedSize: const Size(300, 40)),)
+
             ],
           ),
         )
